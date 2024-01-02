@@ -12,3 +12,6 @@ A guide on how to add the font: https://support.microsoft.com/en-us/office/add-a
 
 I mostly have only tested this using the Spyder IDE - It works on my install of python on windows as well.
 I have encountered issues with Anaconda relating to the CSV line - ignoring any issues until I finish it.
+
+![image](https://github.com/kona-13/Tkinter-Random-JP-Word-Generator/assets/77511759/045c3eaf-7b0a-4db5-931e-db8061dd9ff0)
+
