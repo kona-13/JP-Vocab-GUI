@@ -9,3 +9,6 @@ Feel free to do whatever you want with this.
 I used this font - so you will probably need it: https://fonts.google.com/noto/specimen/Noto+Sans+JP
 
 A guide on how to add the font: https://support.microsoft.com/en-us/office/add-a-font-b7c5f17c-4426-4b53-967f-455339c564c1
+
+I mostly have only tested this using the Spyder IDE - It works on my install of python on windows as well.
+I have encountered issues with Anaconda relating to the CSV line - ignoring any issues until I finish it.
