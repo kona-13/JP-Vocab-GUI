@@ -1,6 +1,6 @@
 A Tkinter application that pulls a random word from a .csv file.
 
-![image](https://github.com/kona-13/Tkinter-Random-JP-Word-Generator/assets/77511759/a9bbd54f-0fed-4502-8533-50bd0ccf387b)
+![image](https://github.com/kona-13/Tkinter-Random-JP-Word-Generator/assets/77511759/8ccecd61-46d7-4f98-907b-825a1cbf6df6)
 
 The words were sourced from this list: https://docs.google.com/spreadsheets/d/13PjfuQSsbkixNGj_9U271M6eqGVVWp5ATRivKlN06S4/edit#gid=0
 
