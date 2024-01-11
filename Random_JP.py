@@ -143,6 +143,8 @@ root.bind('r', lambda event: reveal_meaning())
 root.bind('c', lambda event: reveal_meaning())
 root.bind('z', lambda event: click_yes())
 root.bind('x', lambda event: click_no())
+root.bind('y', lambda event: click_yes())
+root.bind('n', lambda event: click_no())
 
 # Binding for text widget copying
 text_widget.bind("<Control-a>", lambda e: text_widget.tag_add(tk.SEL, "1.0", "end"))
