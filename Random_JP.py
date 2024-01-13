@@ -107,7 +107,7 @@ def helpwindow():
 
 root = tk.Tk()
 root.title("Random Japanese Word Generator-inator!")
-canvas = tk.Canvas(root, width=600, height=450, bg='#5D5F5E')
+canvas = tk.Canvas(root, width=800, height=650, bg='#5D5F5E')
 canvas.grid(columnspan=5, rowspan=7)
 root.eval('tk::PlaceWindow . center')
 root.resizable(False, False)
