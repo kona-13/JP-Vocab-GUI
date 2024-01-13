@@ -9,3 +9,7 @@ Feel free to do whatever you want with this.
 I used this font - so you will probably need it: https://fonts.google.com/noto/specimen/Noto+Sans+JP
 
 A guide on how to add the font: https://support.microsoft.com/en-us/office/add-a-font-b7c5f17c-4426-4b53-967f-455339c564c1
+
+Plan to add:
+
+1.) A sorting algorithm of sorts so that you see words you have just seen and found hard again sooner
