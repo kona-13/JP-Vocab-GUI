@@ -13,3 +13,5 @@ A guide on how to add the font: https://support.microsoft.com/en-us/office/add-a
 Plan to add:
 
 1.) A sorting algorithm of sorts so that you see words you have just seen and found hard again sooner
+
+2.) Radio buttons to exclude vocab by level.
