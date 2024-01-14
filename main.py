@@ -140,6 +140,7 @@ version = tk.Label(root, text="\n\nVersion 1.0", bg='#5D5F5E', fg='white' )
 version.grid(row=6, column=0)
 
 root.bind('r', lambda event: reveal_meaning())
+root.bind('<space>', lambda event: reveal_meaning())
 root.bind('c', lambda event: reveal_meaning())
 root.bind('z', lambda event: click_yes())
 root.bind('x', lambda event: click_no())
