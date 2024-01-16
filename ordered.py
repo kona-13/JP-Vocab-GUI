@@ -8,6 +8,7 @@ Created on Tue Jan 16 13:57:30 2024
 import tkinter as tk
 import csv
 
+#Pulls from .csv
 def import_JP_Vocab(file_path):
     with open(file_path, newline='', encoding='utf-8') as csvfile:
         reader = csv.reader(csvfile)
@@ -34,6 +35,7 @@ nopoints = 0
 totalpoints = 0
 first_press = True
 
+#Updates the text in box
 def change_text(event=None):
     global points, first_press
     random_JP = vocab_generator.get_next_word()
@@ -61,6 +63,8 @@ def change_text(event=None):
     reveal_button.config(state=tk.NORMAL)
     update_points_label()
 
+
+#Shows meaning + disables reveal button
 def reveal_meaning():
     global points, first_press
     if first_press:
@@ -68,7 +72,6 @@ def reveal_meaning():
     button.grid_forget()  # Hide the button after the first press
         
     selected_entry = text_widget.get("1.0", "1.0 lineend").strip()  # Get the first line (random_JP[0])
-    #total_entries = len(JP)
 
     for index, random_JP in enumerate(JP, start=1):
         stripped_random_JP_1 = random_JP[1].replace("(", "").replace(")", "")  # Remove brackets
@@ -100,7 +103,8 @@ def click_yes():
 
 def update_points_label():
     points_label.config(text=f"Total: {totalpoints}\n Correct: {yespoints}\n Incorrect: {nopoints}")
-    
+
+#Help window stuff   
 def helpwindow():
     popup = tk.Toplevel(root)
     popup.title("Help")
@@ -110,22 +114,21 @@ def helpwindow():
     
     
     label = tk.Label(popup, text="Controls:\n\nYes: y or z\nNo: n or x\nReveal: r or space\nCopy: ctrl + c\n", fg='white', bg='#5D5F5E', font=('Noto Sans CJK JP', 11, 'bold'))
-    label.pack(padx=10, pady=10)
-   # label2 = tk.Label(popup, text="Yes: y or z\nNo: n or x\nReveal: r or c\nCopy: ctrl + c\n", fg='white', bg='#5D5F5E', font=('Noto Sans CJK JP', 10))
-   # label2.pack(padx=10, pady=10)
-    
-    
+    label.pack(padx=10, pady=10)   
+  
     close_button = tk.Button(popup, text="Close", command=popup.destroy)
     close_button.pack(pady=10)
 
+
+#Tkinter stuff
 root = tk.Tk()
 root.title("Japanese Vocab in Order")
-canvas = tk.Canvas(root, width=650, height=500, bg='#5D5F5E')
+canvas = tk.Canvas(root, width=700, height=550, bg='#5D5F5E')
 canvas.grid(columnspan=5, rowspan=7)
 root.eval('tk::PlaceWindow . center')
 root.resizable(False, False)
 
-text_widget = tk.Text(root, wrap=tk.WORD, font=('Noto Sans CJK JP', 24), height=4, width=30, bg='#5D5F5E', fg='white')
+text_widget = tk.Text(root, wrap=tk.WORD, font=('Noto Sans CJK JP', 30), height=4, width=30, bg='#5D5F5E', fg='white')
 text_widget.tag_configure("center", justify="center")
 text_widget.tag_add("center", "1.0", "end")
 text_widget.config(state=tk.DISABLED)
@@ -149,20 +152,18 @@ points_label.grid(row=6, column=2, pady=(10, 0))
 help_btn = tk.Button(root, text="Help", command=helpwindow)
 help_btn.grid(row=6, column=4, pady=(10, 0))
 
-#level_select = tk.Label(root, text="Exclude\nVocab", font=('Noto Sans CJK JP', 15), bg='#5D5F5E', fg='white')
-#level_select.grid(row=0, column=0)
-
 version = tk.Label(root, text="\n\nVersion 1.02", bg='#5D5F5E', fg='white' )
 version.grid(row=6, column=0)
 
+#Bindings
 root.bind('r', lambda event: reveal_meaning())
-root.bind('<space>', lambda event: reveal_meaning())
 root.bind('z', lambda event: click_yes())
 root.bind('x', lambda event: click_no())
 root.bind('y', lambda event: click_yes())
 root.bind('n', lambda event: click_no())
+root.bind('<space>', lambda event: reveal_meaning())
 
-# Binding for text widget copying
+# Select all and copy pasta
 text_widget.bind("<Control-a>", lambda e: text_widget.tag_add(tk.SEL, "1.0", "end"))
 text_widget.bind("<Control-c>", lambda e: root.clipboard_clear() or root.clipboard_append(text_widget.get(tk.SEL_FIRST, tk.SEL_LAST)) or root.update())
 
