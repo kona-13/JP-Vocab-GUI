@@ -96,7 +96,7 @@ def helpwindow():
     popup.resizable(False, False)
     
     
-    label = tk.Label(popup, text="Controls:\n\nYes: y or z\nNo: n or x\nReveal: r or c\nCopy: ctrl + c\n", fg='white', bg='#5D5F5E', font=('Noto Sans CJK JP', 11, 'bold'))
+    label = tk.Label(popup, text="Controls:\n\nYes: y or z\nNo: n or x\nReveal: r or space\nCopy: ctrl + c\n", fg='white', bg='#5D5F5E', font=('Noto Sans CJK JP', 11, 'bold'))
     label.pack(padx=10, pady=10)
    # label2 = tk.Label(popup, text="Yes: y or z\nNo: n or x\nReveal: r or c\nCopy: ctrl + c\n", fg='white', bg='#5D5F5E', font=('Noto Sans CJK JP', 10))
    # label2.pack(padx=10, pady=10)
@@ -106,7 +106,7 @@ def helpwindow():
     close_button.pack(pady=10)
 
 root = tk.Tk()
-root.title("Random Japanese Word Generator-inator!")
+root.title("Random Japanese Word")
 canvas = tk.Canvas(root, width=800, height=650, bg='#5D5F5E')
 canvas.grid(columnspan=5, rowspan=7)
 root.eval('tk::PlaceWindow . center')
@@ -141,7 +141,6 @@ version.grid(row=6, column=0)
 
 root.bind('r', lambda event: reveal_meaning())
 root.bind('<space>', lambda event: reveal_meaning())
-root.bind('c', lambda event: reveal_meaning())
 root.bind('z', lambda event: click_yes())
 root.bind('x', lambda event: click_no())
 root.bind('y', lambda event: click_yes())
