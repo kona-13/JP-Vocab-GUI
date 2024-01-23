@@ -40,28 +40,28 @@ def change_text(event=None):
     global points, first_press
     random_JP = vocab_generator.get_next_word()
     stripped_random_JP_1 = random_JP[1].replace("(", "").replace(")", "")  # Remove brackets
+
+    text_widget.config(state=tk.NORMAL)
+    text_widget.delete(1.0, tk.END)
+
     if random_JP[0] == stripped_random_JP_1:
-        text_widget.config(state=tk.NORMAL)
-        text_widget.delete(1.0, tk.END)
-        text_widget.insert(tk.END, f"{random_JP[0]}")
-        text_widget.tag_configure("center", justify="center")
-        text_widget.tag_add("center", "1.0", "end")
-        text_widget.config(state=tk.DISABLED)
+        text_widget.insert(tk.END, f"{random_JP[0]}", "kanji")
     else:
-        text_widget.config(state=tk.NORMAL)
-        text_widget.delete(1.0, tk.END)
-        text_widget.insert(tk.END, f"{random_JP[0]}\n{random_JP[1]}")
-        text_widget.tag_configure("center", justify="center")
-        text_widget.tag_add("center", "1.0", "end")
-        text_widget.config(state=tk.DISABLED)
-        
+        text_widget.insert(tk.END, f"{random_JP[0]}\n", "kanji")
+        text_widget.insert(tk.END, f"{random_JP[1]}", "kana")
+
+    text_widget.tag_configure("center", justify="center")
+    text_widget.tag_add("center", "1.0", "end")
+    text_widget.config(state=tk.DISABLED)
+
     if first_press:
         first_press = False
         reveal_button.config(state=tk.NORMAL)
         button.grid_forget()
-    
+
     reveal_button.config(state=tk.NORMAL)
     update_points_label()
+
 
 
 #Shows meaning + disables reveal button
@@ -70,7 +70,7 @@ def reveal_meaning():
     if first_press:
         first_press = False
     button.grid_forget()  # Hide the button after the first press
-        
+
     selected_entry = text_widget.get("1.0", "1.0 lineend").strip()  # Get the first line (random_JP[0])
 
     for index, random_JP in enumerate(JP, start=1):
@@ -78,12 +78,18 @@ def reveal_meaning():
         entry_text = random_JP[0]
         if entry_text == selected_entry or stripped_random_JP_1 == selected_entry:
             meaning = random_JP[2]  # Depends on which CSV
+
             text_widget.config(state=tk.NORMAL)
             text_widget.delete(1.0, tk.END)
-            text_widget.insert(tk.END, f"{random_JP[0]}\n{random_JP[1]}\nMeaning: {meaning}")
+
+            text_widget.insert(tk.END, f"{random_JP[0]}", "kanji")
+            text_widget.insert(tk.END, f"\n{random_JP[1]}", "kana")
+            text_widget.insert(tk.END, f"\nMeaning: {meaning}")
+
             text_widget.tag_configure("center", justify="center")
             text_widget.tag_add("center", "1.0", "end")
             text_widget.config(state=tk.DISABLED)
+
             reveal_button.config(state=tk.DISABLED)
             break
     else:
@@ -103,6 +109,15 @@ def click_yes():
 
 def update_points_label():
     points_label.config(text=f"Total: {totalpoints}\n Correct: {yespoints}\n Incorrect: {nopoints}")
+    
+def reset_quiz():
+    global yespoints, nopoints, totalpoints, first_press
+    yespoints = 0
+    nopoints = 0
+    totalpoints = 0
+    first_press = True
+    vocab_generator.index = 0
+    change_text()
 
 #Help window stuff   
 def helpwindow():
@@ -113,7 +128,7 @@ def helpwindow():
     popup.resizable(False, False)
     
     
-    label = tk.Label(popup, text="Controls:\n\nYes: y or z\nNo: n or x\nReveal: r or space\nCopy: ctrl + c\n", fg='white', bg='#5D5F5E', font=('Noto Sans CJK JP', 11, 'bold'))
+    label = tk.Label(popup, text="Controls:\n\nYes: y or z\nNo: n or x\nReveal: r or space\nReset: 1\nCopy: ctrl + c\n", fg='white', bg='#5D5F5E', font=('Noto Sans CJK JP', 11, 'bold'))
     label.pack(padx=10, pady=10)   
   
     close_button = tk.Button(popup, text="Close", command=popup.destroy)
@@ -133,9 +148,11 @@ text_widget.tag_configure("center", justify="center")
 text_widget.tag_add("center", "1.0", "end")
 text_widget.config(state=tk.DISABLED)
 text_widget.place(relx=0.5, rely=0.3, anchor='center')
+text_widget.tag_configure("kanji", font=('Noto Sans CJK JP', 40))
+text_widget.tag_configure("kana", font=('Noto Sans CJK JP', 20))
 
 button = tk.Button(root, text="Start", command=change_text)
-button.grid(row=1, column=2)
+button.grid(row=0, column=2)
 
 reveal_button = tk.Button(root, text="Reveal Meaning", command=reveal_meaning, state=tk.DISABLED)
 reveal_button.grid(row=5, column=2, columnspan=1, sticky="nsew")
@@ -152,8 +169,11 @@ points_label.grid(row=6, column=2, pady=(10, 0))
 help_btn = tk.Button(root, text="Help", command=helpwindow)
 help_btn.grid(row=6, column=4, pady=(10, 0))
 
-version = tk.Label(root, text="\n\nVersion 1.02", bg='#5D5F5E', fg='white' )
+version = tk.Label(root, text="\n\nVersion 1.04", bg='#5D5F5E', fg='white' )
 version.grid(row=6, column=0)
+
+reset_btn = tk.Button(root, text="Reset", command=reset_quiz)
+reset_btn.grid(row=0, column=0)
 
 #Bindings
 root.bind('r', lambda event: reveal_meaning())
@@ -162,6 +182,7 @@ root.bind('x', lambda event: click_no())
 root.bind('y', lambda event: click_yes())
 root.bind('n', lambda event: click_no())
 root.bind('<space>', lambda event: reveal_meaning())
+root.bind('1', lambda event: reset_quiz())
 
 # Select all and copy pasta
 text_widget.bind("<Control-a>", lambda e: text_widget.tag_add(tk.SEL, "1.0", "end"))
