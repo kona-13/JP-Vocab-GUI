@@ -9,7 +9,7 @@ This application is intended to be used to learn and review vocab.
 
 The words were sourced from this list: https://docs.google.com/spreadsheets/d/13PjfuQSsbkixNGj_9U271M6eqGVVWp5ATRivKlN06S4/edit#gid=0
 
-Feel free to do whatever you want with this. The .csv format is: Kanji, Kana, Meaning, Type (i.e. Noun), JLPT Level*. Laying out another dataset like this and naming it vocab.csv will work fine. E.g. https://imgur.com/a/Q3nAGUk
+Feel free to do whatever you want with this. The .csv format is: Kanji, Kana, Meaning, Type (i.e. Noun), JLPT Level*. Laying out another dataset like this and naming it vocab.csv will work fine (e.g. https://imgur.com/a/Q3nAGUk).
 
 *This dataset uses the old JLPT levels - so it predates the N5 - N1, instead using JLPT4 - JLPT1, with an additional set of words under JLPT0 - see: https://en.wikipedia.org/wiki/Japanese-Language_Proficiency_Test#Older_edition
 
