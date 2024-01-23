@@ -22,3 +22,5 @@ Plan to add:
 1.) A sorting algorithm of sorts so that you see words you have just seen and found hard again sooner
 
 2.) Radio buttons to exclude vocab by level.
+
+3.) Audio?
