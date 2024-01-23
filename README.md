@@ -4,7 +4,7 @@
 
 2.) ordered.py - pulls from vocab.csv in order.
 
-![image](https://github.com/kona-13/JP-Word-APP-GUI/assets/77511759/ee9b3445-0e0b-4d65-945f-d31adee88200)
+![image](https://github.com/kona-13/JP-Vocab-GUI/assets/77511759/ccce7935-3785-47ed-a694-2e0698793ce7)
 
 These applications are intended to be used to learn and review vocab.
 
