@@ -2,9 +2,9 @@
 
 1.) main.py - randomly pulls words from vocab.csv
 
-2.) ordered.py - pulls from vocab.csv in order.
+2.) ordered.py - pulls from vocab.csv in order. Added Reset button to this one for ease of use.
 
-![image](https://github.com/kona-13/JP-Vocab-GUI/assets/77511759/ccce7935-3785-47ed-a694-2e0698793ce7)
+![image](https://github.com/kona-13/JP-Vocab-GUI/assets/77511759/c8ffaa4e-f40b-4eb6-b302-0d298a042e35)
 
 These applications are intended to be used to learn and review vocab.
 
