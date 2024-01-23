@@ -143,7 +143,7 @@ canvas.grid(columnspan=5, rowspan=7)
 root.eval('tk::PlaceWindow . center')
 root.resizable(False, False)
 
-text_widget = tk.Text(root, wrap=tk.WORD, font=('Noto Sans CJK JP', 30), height=4, width=30, bg='#5D5F5E', fg='white')
+text_widget = tk.Text(root, wrap=tk.WORD, font=('Noto Sans CJK JP', 25), height=5, width=30, bg='#5D5F5E', fg='white')
 text_widget.tag_configure("center", justify="center")
 text_widget.tag_add("center", "1.0", "end")
 text_widget.config(state=tk.DISABLED)
