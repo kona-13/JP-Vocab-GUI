@@ -1,12 +1,11 @@
-2 Tkinter applications that pull vocabulary from vocab.csv.
+Tkinter applications that pull vocabulary from vocab.csv.
 
-1.) main.py - randomly pulls words from vocab.csv
+By default it pulls in order - but this can be changed from the order button.
 
-2.) ordered.py - pulls from vocab.csv in order. Added Reset button to this one for ease of use.
+![image](https://github.com/kona-13/JP-Vocab-GUI/assets/77511759/e20e9e44-2696-4a3d-a787-3e02d7b74e16)
 
-![image](https://github.com/kona-13/JP-Vocab-GUI/assets/77511759/c8ffaa4e-f40b-4eb6-b302-0d298a042e35)
 
-These applications are intended to be used to learn and review vocab.
+This application is intended to be used to learn and review vocab.
 
 The words were sourced from this list: https://docs.google.com/spreadsheets/d/13PjfuQSsbkixNGj_9U271M6eqGVVWp5ATRivKlN06S4/edit#gid=0
 
@@ -20,8 +19,6 @@ A guide on how to add the font: https://support.microsoft.com/en-us/office/add-a
 
 Plan to add:
 
-1.) Merge 2 programs into one
+1.) A sorting algorithm of sorts so that you see words you have just seen and found hard again sooner
 
-2.) A sorting algorithm of sorts so that you see words you have just seen and found hard again sooner
-
-3.) Radio buttons to exclude vocab by level.
+2.) Radio buttons to exclude vocab by level.
