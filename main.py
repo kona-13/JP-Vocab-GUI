@@ -11,7 +11,7 @@ import random
 
 #Pulls from .csv
 def import_JP_Vocab(file_path):
-    with open(file_path, newline='', encoding='utf-8') as csvfile:
+    with open(file_path, newline='', encoding='utf-8-sig') as csvfile:
         reader = csv.reader(csvfile)
         return [row for row in reader]
 
@@ -110,8 +110,25 @@ def reveal_meaning():
 
 def click_no():
     global nopoints, totalpoints
-    nopoints +=1
-    totalpoints +=1
+    nopoints += 1
+    totalpoints += 1
+
+    # Get the currently displayed text in the Text widget
+    selected_entry = text_widget.get("1.0", "1.0 lineend").strip()
+
+    # Find the corresponding entry in the CSV and write it to a log file
+    with open('wrong.txt', 'a', encoding='utf-8') as log_file:
+        for random_JP in JP:
+            stripped_random_JP_1 = random_JP[1].replace("(", "").replace(")", "")  # Remove brackets
+            entry_text = random_JP[0]
+
+            if entry_text == selected_entry or stripped_random_JP_1 == selected_entry:
+                log_file.write(f"Wrong: {random_JP}\n")
+                break
+        else:
+            log_file.write("No match found.\n")
+
+    # Update the text in the Text widget
     change_text()
 
 def click_yes():
