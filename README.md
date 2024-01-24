@@ -7,7 +7,7 @@ By default it pulls in order - but this can be changed from the order button.
 
 This application is intended to be used to learn and review vocab.
 
-Words pressed no on will be added to a new file called "wrong.txt".
+Words pressed "no" on will be added to a new file called "wrong.txt".
 
 The words were sourced from this list: https://docs.google.com/spreadsheets/d/13PjfuQSsbkixNGj_9U271M6eqGVVWp5ATRivKlN06S4/edit#gid=0
 
