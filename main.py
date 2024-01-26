@@ -31,6 +31,7 @@ class VocabGenerator:
             self.index += 1
             return word
         else:
+            self.reset_index()
             return None
 
     def reset_index(self):
