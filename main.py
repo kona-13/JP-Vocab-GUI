@@ -1,15 +1,8 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Tue Jan 16 13:57:30 2024
-
-@author: Steven
-"""
-
 import tkinter as tk
 import csv
 import random
 
-#Pulls from .csv
+# Pulls from .csv
 def import_JP_Vocab(file_path):
     with open(file_path, newline='', encoding='utf-8-sig') as csvfile:
         reader = csv.reader(csvfile)
@@ -48,11 +41,20 @@ yespoints = 0
 nopoints = 0
 totalpoints = 0
 first_press = True
+cycle_counter = 7
+show_again = []
 
-#Updates the text in box
+# Updates the text in box
 def change_text(event=None):
-    global points, first_press
-    random_JP = vocab_generator.get_next_word()
+    global first_press, cycle_counter, show_again
+
+    if cycle_counter == 0 and show_again:
+        random_JP = show_again.pop(0)
+        cycle_counter = 7
+    else:
+        random_JP = vocab_generator.get_next_word()
+        cycle_counter = max(0, cycle_counter - 1)
+
     stripped_random_JP_1 = random_JP[1].replace("(", "").replace(")", "")  # Remove brackets
 
     text_widget.config(state=tk.NORMAL)
@@ -75,12 +77,12 @@ def change_text(event=None):
 
     reveal_button.config(state=tk.NORMAL)
     update_points_label()
+    print(cycle_counter)
 
-
-
-#Shows meaning + disables reveal button
+# Shows meaning + disables reveal button
 def reveal_meaning():
-    global points, first_press
+    global first_press
+
     if first_press:
         first_press = False
     button.grid_forget()  # Hide the button after the first press
@@ -109,44 +111,65 @@ def reveal_meaning():
     else:
         print("No match found.")
 
+# Click "No" button
 def click_no():
-    global nopoints, totalpoints
+    global nopoints, totalpoints, cycle_counter, show_again
+
     nopoints += 1
     totalpoints += 1
 
-    # Get the currently displayed text in the Text widget
+    # Log the current word into show_again
     selected_entry = text_widget.get("1.0", "1.0 lineend").strip()
+    for random_JP in JP:
+        stripped_random_JP_1 = random_JP[1].replace("(", "").replace(")", "")  # Remove brackets
+        entry_text = random_JP[0]
+
+        if entry_text == selected_entry or stripped_random_JP_1 == selected_entry:
+            show_again.append(random_JP)
+            break
+    #DO NOT DELETE THIS CODE!!!!!!!!!
+    # Get the currently displayed text in the Text widget
+    #selected_entry = text_widget.get("1.0", "1.0 lineend").strip()
 
     # Find the corresponding entry in the CSV and write it to a log file
-    with open('wrong.txt', 'a', encoding='utf-8') as log_file:
-        for random_JP in JP:
-            stripped_random_JP_1 = random_JP[1].replace("(", "").replace(")", "")  # Remove brackets
-            entry_text = random_JP[0]
+    #with open('wrong.txt', 'a', encoding='utf-8') as log_file:
+        #for random_JP in JP:
+            #stripped_random_JP_1 = random_JP[1].replace("(", "").replace(")", "")  # Remove brackets
+            #entry_text = random_JP[0]
 
-            if entry_text == selected_entry or stripped_random_JP_1 == selected_entry:
-                log_file.write(f"Wrong: {random_JP}\n")
-                break
-        else:
-            log_file.write("No match found.\n")
+            #if entry_text == selected_entry or stripped_random_JP_1 == selected_entry:
+                #log_file.write(f"Wrong: {random_JP}\n")
+                #break
+        #else:
+            #log_file.write("No match found.\n")
+
+    # Update the text in the Text widget
 
     # Update the text in the Text widget
     change_text()
 
+# Click "Yes" button
 def click_yes():
     global yespoints, totalpoints
-    totalpoints+=1
+
+    totalpoints += 1
     yespoints += 1
     change_text()
 
+# Update points label
 def update_points_label():
     points_label.config(text=f"Total: {totalpoints}\n Correct: {yespoints}\n Incorrect: {nopoints}")
-    
+
+# Reset the quiz
 def reset_quiz():
-    global yespoints, nopoints, totalpoints, first_press, vocab_generator, JP
+    global first_press, vocab_generator, JP, cycle_counter, show_again, yespoints, nopoints, totalpoints
+
+    first_press = True
+    cycle_counter = 7
+    show_again = []
     yespoints = 0
     nopoints = 0
     totalpoints = 0
-    first_press = True
 
     # Re-import the CSV to ensure a fresh start
     JP = import_JP_Vocab('vocab.csv')
@@ -157,25 +180,25 @@ def reset_quiz():
     # Reset the VocabGenerator index to 0 considering the order mode
     vocab_generator.reset_index()
     change_text()
-    
-    
-#Help window stuff   
+
+# Help window
 def helpwindow():
     popup = tk.Toplevel(root)
     popup.title("Help")
     popup.geometry("150x300")
     popup.configure(bg='#5D5F5E')
     popup.resizable(False, False)
-    
-    
+
     label = tk.Label(popup, text="Controls:\n\nYes: y or z\nNo: n or x\nReveal: r or space\nReset: 1\nCopy: ctrl + c\n", fg='white', bg='#5D5F5E', font=('Noto Sans CJK JP', 11, 'bold'))
     label.pack(padx=10, pady=10)   
-  
+
     close_button = tk.Button(popup, text="Close", command=popup.destroy)
     close_button.pack(pady=10)
-    
+
+# Open order mode window
 def open_order_mode_window():
-    global order_mode_var  # Add this line to make order_mode_var global
+    global order_mode_var
+
     order_mode_window = tk.Toplevel(root)
     order_mode_window.title("Order Mode")
     order_mode_window.geometry("200x100")
@@ -191,9 +214,10 @@ def open_order_mode_window():
 
     random_order_radio = tk.Radiobutton(order_mode_window, text="Random", variable=order_mode_var, value=1)
     random_order_radio.grid(row=1, column=0, pady=5)
-    
+
     def update_order_mode():
         global vocab_generator
+
         vocab_generator = VocabGenerator(JP, random_order=(order_mode_var.get() == 1))
         reset_quiz()
 
@@ -201,8 +225,7 @@ def open_order_mode_window():
     in_order_radio.config(command=update_order_mode)
     random_order_radio.config(command=update_order_mode)
 
-
-#Tkinter stuff
+# Tkinter stuff
 root = tk.Tk()
 root.title("Japanese Vocab")
 canvas = tk.Canvas(root, width=700, height=550, bg='#5D5F5E')
@@ -236,7 +259,7 @@ points_label.grid(row=6, column=2, pady=(10, 0))
 help_btn = tk.Button(root, text="Help", command=helpwindow)
 help_btn.grid(row=6, column=4)
 
-version = tk.Label(root, text="\n\nVersion 1.05", bg='#5D5F5E', fg='white' )
+version = tk.Label(root, text="\n\nVersion 1.06", bg='#5D5F5E', fg='white' )
 version.grid(row=6, column=0)
 
 reset_btn = tk.Button(root, text="Reset", command=reset_quiz)
@@ -245,7 +268,7 @@ reset_btn.grid(row=0, column=0)
 order_mode_button = tk.Button(root, text="Order", command=open_order_mode_window)
 order_mode_button.grid(row=6, column=3)
 
-#Bindings
+# Bindings
 root.bind('r', lambda event: reveal_meaning())
 root.bind('z', lambda event: click_yes())
 root.bind('x', lambda event: click_no())
@@ -259,4 +282,3 @@ text_widget.bind("<Control-a>", lambda e: text_widget.tag_add(tk.SEL, "1.0", "en
 text_widget.bind("<Control-c>", lambda e: root.clipboard_clear() or root.clipboard_append(text_widget.get(tk.SEL_FIRST, tk.SEL_LAST)) or root.update())
 
 root.mainloop()
-
