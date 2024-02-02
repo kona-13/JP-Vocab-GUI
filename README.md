@@ -1,4 +1,4 @@
-Tkinter application that pull vocabulary from vocab.csv.
+Tkinter application that pulls vocabulary from vocab.csv.
 
 By default it pulls in order - but this can be changed from the order button.
 
