@@ -1,3 +1,10 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Wed Jan 10 19:14:16 2024
+
+@author: Steven
+"""
+
 import tkinter as tk
 import csv
 import random
@@ -41,7 +48,7 @@ yespoints = 0
 nopoints = 0
 totalpoints = 0
 first_press = True
-cycle_counter = 7
+cycle_counter = 5
 show_again = []
 
 # Updates the text in box
@@ -50,11 +57,16 @@ def change_text(event=None):
 
     if cycle_counter == 0 and show_again:
         random_JP = show_again.pop(0)
-        cycle_counter = 7
+        cycle_counter = 5       
     else:
         random_JP = vocab_generator.get_next_word()
-        cycle_counter = max(0, cycle_counter - 1)
-
+        cycle_counter -= 1
+        if cycle_counter < 0:
+            cycle_counter = 5
+    #else:
+    #    random_JP = vocab_generator.get_next_word()
+    #    cycle_counter = max(0, cycle_counter - 1)
+        
     stripped_random_JP_1 = random_JP[1].replace("(", "").replace(")", "")  # Remove brackets
 
     text_widget.config(state=tk.NORMAL)
@@ -165,7 +177,7 @@ def reset_quiz():
     global first_press, vocab_generator, JP, cycle_counter, show_again, yespoints, nopoints, totalpoints
 
     first_press = True
-    cycle_counter = 7
+    cycle_counter = 5
     show_again = []
     yespoints = 0
     nopoints = 0
