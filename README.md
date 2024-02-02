@@ -7,8 +7,6 @@ By default it pulls in order - but this can be changed from the order button.
 
 This application is intended to be used to learn and review vocab.
 
-Words pressed "no" on will be added to a new file called "wrong.txt".
-
 The words were sourced from this list: https://docs.google.com/spreadsheets/d/13PjfuQSsbkixNGj_9U271M6eqGVVWp5ATRivKlN06S4/edit#gid=0
 
 Feel free to do whatever you want with this. The .csv format is: Kanji, Kana, Meaning, Type (i.e. Noun), JLPT Level*. Laying out another dataset like this and naming it vocab.csv will work fine (e.g. https://imgur.com/a/Q3nAGUk).
@@ -21,7 +19,7 @@ A guide on how to add the font (Windows): https://support.microsoft.com/en-us/of
 
 Plan to add:
 
-1.) A sorting algorithm of sorts so that you see words you have just seen and found hard again sooner
+1.) Optional setting to record wrongs. The ability to use this list of wrongs as a dataset instead of vocab.csv
 
 2.) Radio buttons to exclude vocab by level.
 
