@@ -7,6 +7,8 @@ By default it pulls in order - but this can be changed from the order button.
 
 This application is intended to be used to learn and review vocab.
 
+Download the zip and extract contents to folder for executable version.
+
 The words were sourced from this list: https://docs.google.com/spreadsheets/d/13PjfuQSsbkixNGj_9U271M6eqGVVWp5ATRivKlN06S4/edit#gid=0
 
 Feel free to do whatever you want with this. The .csv format is: Kanji, Kana, Meaning, Type (i.e. Noun), JLPT Level*. Laying out another dataset like this and naming it vocab.csv will work fine (e.g. https://imgur.com/a/Q3nAGUk).
