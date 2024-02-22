@@ -19,9 +19,9 @@ I used this font - so you will probably need it: https://fonts.google.com/noto/s
 
 A guide on how to add the font (Windows): https://support.microsoft.com/en-us/office/add-a-font-b7c5f17c-4426-4b53-967f-455339c564c1
 
-Urgent issues to resolve:
+Issues to resolve:
 
-1.) Tkinter traceback line 105 on random order mode on v1.06 (possibly on other versions)
+1.) Tkinter traceback line 105 on random order mode on v1.06 (possibly on other versions) - this happens randomly and can be ignored by hitting reset for now - but I will attempt to figure out what is causing it.
 
 Plan to add:
 
