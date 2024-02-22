@@ -19,6 +19,10 @@ I used this font - so you will probably need it: https://fonts.google.com/noto/s
 
 A guide on how to add the font (Windows): https://support.microsoft.com/en-us/office/add-a-font-b7c5f17c-4426-4b53-967f-455339c564c1
 
+Urgent issues to resolve:
+
+1.) Tkinter traceback line 105 on random order mode on v1.06 (possibly on other versions)
+
 Plan to add:
 
 1.) Optional setting to record wrongs. The ability to use this list of wrongs as a dataset instead of vocab.csv
